@@ -601,7 +601,7 @@ const Home = () => {
             {
               title: "Python Programming",
               issuer: "Coign Consultants Pvt. Ltd.",
-              href: "https://drive.google.com/file/d/1MvzOpakfdF23qOWFfRRvuYz2RzJAHbvO/view?usp=drive_link",
+              href: "https://drive.google.com/file/d/1EAOBoUV1G8akC143CW5Qcanvks0u5X-a/view?usp=sharing",
               emoji: "🐍",
             },
             {
