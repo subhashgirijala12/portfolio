@@ -3,33 +3,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import {
   FaLinkedin, FaEnvelope, FaPhone, FaDownload,
-  FaRobot, FaCode, FaDatabase, FaLinux, FaGraduationCap,
+  FaRobot, FaCode, FaGithub, FaDatabase, FaLinux, FaGraduationCap,
   FaBriefcase, FaCertificate, FaMapMarkerAlt, FaExternalLinkAlt
 } from 'react-icons/fa';
 import './Home.css';
 import profilePhoto from './assets/profile.jpg';
 import tWorksLogo from './assets/tworks-logo.png';
-import mascotImg from './assets/mascot.png'; // ← ADD THIS: copy mascot.png → src/assets/mascot.png
+import mascotImg from './assets/mascot.png'; 
 import waterQualityImg from './assets/water-quality.png';
 import portfolioImg from './assets/portfolio.png';
 
-// ============================================================
-// SECTION BACKGROUND / DECORATIVE IMAGES
-// ============================================================
-// OPTIONAL IMAGE 4: ROS/Robotics visualization or circuit board
-// → Replace: import roboticsBg from './assets/robotics-bg.jpg';
-// → Type: Dark themed robotics, circuit board, or tech pattern image
-// → Size: 1920x1080px, used as subtle section background
-// import roboticsBg from './assets/robotics-bg.jpg';
-
-// ============================================================
-// CERTIFICATION ICONS (optional, enhances cert section)
-// ============================================================
-// OPTIONAL IMAGE 5: Certification badge or institution logos
-// → Replace: import pythonCert from './assets/certs/python-cert.png';
-// → Type: Badge PNG with transparent background
-// → Size: 80x80px
-// import pythonCert from './assets/certs/python-cert.png';
 
 
 // --- Animation Variants ---
@@ -244,14 +227,6 @@ const Home = () => {
             <span /><span /><span />
           </button>
         </div>
-
-        {/* ─── MASCOT: boy leaning on navbar ───────────────────────
-            • Positioned absolute so his hands rest on the navbar bottom edge
-            • Body + head float above the navbar
-            • Hidden on mobile (≤768px) via CSS so it won't block the hamburger
-            • Adjust height / bottom / left in .navbar-mascot CSS to reposition
-        ──────────────────────────────────────────────────────────── */}
-        
       </nav>
       <img
           src={mascotImg}
@@ -280,10 +255,6 @@ const Home = () => {
             <div className="profile-ring-outer" />
             <div className="profile-ring-inner" />
             <div className="profile-glow" />
-            {/* ── PROFILE PHOTO ──
-                Replace `profilePhoto` import at top of file with your actual image path.
-                Type: Professional headshot, square or slightly portrait, neutral/blurred background
-                Recommended: 400×400px JPG or WebP */}
             <img
               src={profilePhoto}
               alt="Girijala Deepak Naga Subhash"
@@ -317,6 +288,9 @@ const Home = () => {
             <div className="social-links">
               <a href="https://www.linkedin.com/in/deepak-naga-subhash-girijala-ba517431a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <FaLinkedin />
+              </a>
+               <a href="https://github.com/subhashgirijala12" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <FaGithub />
               </a>
               <a href="mailto:deepakgirijala96@gmail.com" aria-label="Email">
                 <FaEnvelope />
@@ -363,15 +337,6 @@ const Home = () => {
         <h2 className="section-title"><span>About</span> Me</h2>
         <div className="about-content">
           <div className="about-text-block">
-            {/* ── ABOUT SECTION IMAGE (optional) ──
-                You can add a candid/working photo here for a personal touch.
-                Type: Casual workspace photo or working-at-laptop shot
-                Size: 500×400px JPG
-                Uncomment below when ready:
-            <div className="about-photo-frame">
-              <img src={aboutPhoto} alt="Deepak at work" className="about-photo" />
-            </div>
-            */}
             <p>
               Full-stack developer with hands-on experience building modern web applications using
               <strong> React, Node.js, Express & MySQL</strong>. Passionate about clean code, system design,
