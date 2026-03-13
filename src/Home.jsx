@@ -525,7 +525,7 @@ const Home = () => {
             { title: "Programming", icon: <FaCode />, tags: ["C", "C++", "Python", "JavaScript"], color: "gold" },
             { title: "Web Development", icon: <FaLinux />, tags: ["React", "Node.js", "Express", "HTML", "CSS"], color: "cyan" },
             { title: "Databases", icon: <FaDatabase />, tags: ["MySQL", "SQLite"], color: "purple" },
-            { title: "Tools & Others", icon: <FaRobot />, tags: ["Linux", "Git", "ROS", color: "orange" },
+            { title: "Tools & Others", icon: <FaRobot />, tags: ["Linux", "Git", "ROS"], color: "orange" },
           ].map((category, index) => (
             <motion.div
               key={index}
