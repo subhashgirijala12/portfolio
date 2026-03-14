@@ -12,6 +12,7 @@ import tWorksLogo from './assets/tworks-logo.png';
 import mascotImg from './assets/mascot.png'; 
 import waterQualityImg from './assets/water-quality.png';
 import portfolioImg from './assets/portfolio.png';
+import ushodayaImg from './assets/ushodaya.png';
 
 
 
@@ -311,7 +312,7 @@ const Home = () => {
             <div className="hero-stats">
               <div className="stat"><span className="stat-num">9</span><span className="stat-label">Months Exp</span></div>
               <div className="stat-divider" />
-              <div className="stat"><span className="stat-num">2</span><span className="stat-label">Projects</span></div>
+              <div className="stat"><span className="stat-num">3</span><span className="stat-label">Projects</span></div>
               <div className="stat-divider" />
               <div className="stat"><span className="stat-num">4</span><span className="stat-label">Certifications</span></div>
             </div>
@@ -504,6 +505,13 @@ const Home = () => {
             tags={['React', 'Framer Motion', 'CSS3', 'Vite', 'Responsive']}
             icon={FaCode}
             imgSrc={portfolioImg}
+          />
+          <ProjectCard
+            icon={FaDatabase}
+            title="Ushodaya Bankers"
+            description="A full-stack gold loan management system for a local banking business. Features secure admin login with bcrypt & OTP-based password reset, loan creation, real-time interest calculation, and payment tracking — with a GSAP-animated landing page."
+            tags={["Python", "Flask", "MySQL", "HTML/CSS"]}
+            imgSrc={ushodayaImg}
           />
           {/* Add more <ProjectCard> components here */}
         </div>
