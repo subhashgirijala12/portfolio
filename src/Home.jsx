@@ -276,18 +276,28 @@ const Home = () => {
             ))}
           </div>
 
-          {/* Theme toggle sits between nav-links and hamburger */}
-          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
-
-          <button
-            className={`hamburger ${isMenuOpen ? 'active' : ''}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span /><span /><span />
-          </button>
+          {/* Right-side controls: theme toggle + hamburger */}
+          <div className="nav-right">
+            <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+            <button
+              className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <span /><span /><span />
+            </button>
+          </div>
         </div>
       </nav>
+
+      {/* Mobile menu backdrop — tap outside to close */}
+      {isMenuOpen && (
+        <div
+          className="mobile-nav-backdrop"
+          onClick={() => setIsMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
       <img
           src={mascotImg}
           alt=""
