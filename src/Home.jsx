@@ -1,5 +1,5 @@
-// Home.jsx
-import React, { useState, useEffect, useRef } from 'react';
+// Home.jsx — with Dark / Light mode toggle
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import {
   FaLinkedin, FaEnvelope, FaPhone, FaDownload,
@@ -13,7 +13,6 @@ import mascotImg from './assets/mascot.png';
 import waterQualityImg from './assets/water-quality.png';
 import portfolioImg from './assets/portfolio.png';
 import ushodayaImg from './assets/ushodaya.png';
-
 
 
 // --- Animation Variants ---
@@ -164,11 +163,68 @@ const ProjectCard = ({ icon: Icon, title, description, tags, imgPlaceholder, img
   );
 };
 
+// --- Theme Toggle Button ---
+const ThemeToggle = ({ isDark, onToggle }) => {
+  const btnRef = useRef(null);
+
+  const handleClick = () => {
+    // Add burst class for the ripple animation
+    const btn = btnRef.current;
+    if (btn) {
+      btn.classList.remove('burst');
+      // Force reflow so animation restarts
+      void btn.offsetWidth;
+      btn.classList.add('burst');
+    }
+    onToggle();
+  };
+
+  return (
+    <button
+      ref={btnRef}
+      className="theme-toggle"
+      onClick={handleClick}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? 'Light mode' : 'Dark mode'}
+    >
+      {/* Sun — shown in light mode */}
+      <span className="icon-sun" aria-hidden="true">☀️</span>
+      {/* Moon — shown in dark mode */}
+      <span className="icon-moon" aria-hidden="true">🌙</span>
+    </button>
+  );
+};
+
 // --- Main Component ---
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
+  // Apply / remove [data-theme="light"] on <html>
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isDark) {
+      html.removeAttribute('data-theme');
+    } else {
+      html.setAttribute('data-theme', 'light');
+    }
+  }, [isDark]);
+
+  // Persist preference
+  useEffect(() => {
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved === 'light') setIsDark(false);
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setIsDark(prev => {
+      const next = !prev;
+      localStorage.setItem('portfolio-theme', next ? 'dark' : 'light');
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -219,6 +275,9 @@ const Home = () => {
               </a>
             ))}
           </div>
+
+          {/* Theme toggle sits between nav-links and hamburger */}
+          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
 
           <button
             className={`hamburger ${isMenuOpen ? 'active' : ''}`}
@@ -513,7 +572,6 @@ const Home = () => {
             tags={["Python", "Flask", "MySQL", "HTML/CSS"]}
             imgSrc={ushodayaImg}
           />
-          {/* Add more <ProjectCard> components here */}
         </div>
         <p className="projects-note">✦ More projects coming soon</p>
       </motion.section>
@@ -593,7 +651,6 @@ const Home = () => {
             {
               title: "Industrial Automation, PLC & SCADA",
               issuer: "Enrun India Pvt. Ltd.",
-             
               emoji: "⚙️",
             },
           ].map((cert, i) => (
