@@ -502,7 +502,7 @@ const Home = () => {
             <img src={tWorksLogo} alt="tWorks" className="company-logo" />
             <div className="company-banner-divider" />
             <div className="company-banner-text">
-              <span className="company-banner-label">Currently working at</span>
+              <span className="company-banner-label">Worked In</span>
               <span className="company-banner-name">TWorks, Hyderabad</span>
             </div>
           </div>
