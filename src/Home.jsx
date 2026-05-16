@@ -740,3 +740,4 @@ const Home = () => {
 };
 
 export default Home;
+<meta name="google-site-verification" content="xWd2nhrk_OzFm5JmuxXA4GZrUrBeUW3vzgc8hkoKBZc" />
