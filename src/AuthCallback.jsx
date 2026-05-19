@@ -1,11 +1,11 @@
 // src/pages/AuthCallback.jsx
 
 import React from "react";
-
+import "./AuthCallback.css";
 const AuthCallback = () => {
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
-      <div className="max-w-2xl w-full bg-[#111] border border-[#222] rounded-3xl p-10 shadow-2xl">
+    <div className="auth-callback-page">
+      <div className="auth-card">
         <div className="mb-6">
           <h1 className="text-4xl font-bold mb-3">
             CampusCopilot AI
