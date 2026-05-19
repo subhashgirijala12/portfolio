@@ -519,7 +519,6 @@ const Home = () => {
       >
         <h2 className="section-title">Projects<span></span></h2>
         <div className="projects-grid">
-          {/* Replaced Water Quality project with Lam Research Challenge Web Application (main professional project from resume) */}
           <ProjectCard
             icon={FaCode}
             title="Lam Research Challenge Web Application"
@@ -533,7 +532,6 @@ const Home = () => {
             icon={FaCode}
             imgSrc={portfolioImg}
           />
-          {/* Updated Ushodaya Bankers → Bankers Website to exactly match resume description */}
           <ProjectCard
             icon={FaDatabase}
             title="Bankers Website (Full-Stack Banking Platform)"
