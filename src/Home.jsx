@@ -9,12 +9,9 @@ import {
 import './Home.css';
 import profilePhoto from './assets/profile.jpg';
 import tWorksLogo from './assets/tworks-logo.png';
-import mascotImg from './assets/mascot.png'; 
-import waterQualityImg from './assets/water-quality.png';
+import mascotImg from './assets/mascot.png';
 import portfolioImg from './assets/portfolio.png';
 import ushodayaImg from './assets/ushodaya.png';
-
-
 // --- Animation Variants ---
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,7 +20,6 @@ const containerVariants = {
     transition: { staggerChildren: 0.1, delayChildren: 0.15 }
   }
 };
-
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -32,7 +28,6 @@ const itemVariants = {
     transition: { duration: 0.7, ease: "easeOut" }
   }
 };
-
 const sectionVariants = {
   hidden: { opacity: 0, y: 70 },
   visible: {
@@ -41,7 +36,6 @@ const sectionVariants = {
     transition: { duration: 0.9, ease: "easeOut" }
   }
 };
-
 const card3DVariants = {
   hidden: { opacity: 0, rotateY: -15, z: -100 },
   visible: {
@@ -51,11 +45,9 @@ const card3DVariants = {
     transition: { duration: 0.8, ease: "easeOut" }
   }
 };
-
 // --- 3D Tilt Card Hook ---
 const useTilt = () => {
   const ref = useRef(null);
-
   const handleMouseMove = (e) => {
     const el = ref.current;
     if (!el) return;
@@ -68,16 +60,13 @@ const useTilt = () => {
     const rotateY = ((x - cx) / cx) * 10;
     el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`;
   };
-
   const handleMouseLeave = () => {
     if (ref.current) {
       ref.current.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
     }
   };
-
   return { ref, handleMouseMove, handleMouseLeave };
 };
-
 // --- Floating Particles Background ---
 const ParticlesBackground = () => {
   const particles = Array.from({ length: 60 }, (_, i) => ({
@@ -89,7 +78,6 @@ const ParticlesBackground = () => {
     delay: Math.random() * 10,
     opacity: Math.random() * 0.5 + 0.1,
   }));
-
   return (
     <div className="particles-container" aria-hidden="true">
       {particles.map((p) => (
@@ -110,7 +98,6 @@ const ParticlesBackground = () => {
     </div>
   );
 };
-
 // --- 3D Tilt Card Component ---
 const TiltCard = ({ children, className }) => {
   const { ref, handleMouseMove, handleMouseLeave } = useTilt();
@@ -125,7 +112,6 @@ const TiltCard = ({ children, className }) => {
     </div>
   );
 };
-
 // --- Project Card with Image ---
 const ProjectCard = ({ icon: Icon, title, description, tags, imgPlaceholder, imgSrc }) => {
   const { ref, handleMouseMove, handleMouseLeave } = useTilt();
@@ -162,11 +148,9 @@ const ProjectCard = ({ icon: Icon, title, description, tags, imgPlaceholder, img
     </motion.div>
   );
 };
-
 // --- Theme Toggle Button ---
 const ThemeToggle = ({ isDark, onToggle }) => {
   const btnRef = useRef(null);
-
   const handleClick = () => {
     // Add burst class for the ripple animation
     const btn = btnRef.current;
@@ -178,7 +162,6 @@ const ThemeToggle = ({ isDark, onToggle }) => {
     }
     onToggle();
   };
-
   return (
     <button
       ref={btnRef}
@@ -194,14 +177,12 @@ const ThemeToggle = ({ isDark, onToggle }) => {
     </button>
   );
 };
-
 // --- Main Component ---
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
   // Apply / remove [data-theme="light"] on <html>
   useEffect(() => {
     const html = document.documentElement;
@@ -211,13 +192,11 @@ const Home = () => {
       html.setAttribute('data-theme', 'light');
     }
   }, [isDark]);
-
   // Persist preference
   useEffect(() => {
     const saved = localStorage.getItem('portfolio-theme');
     if (saved === 'light') setIsDark(false);
   }, []);
-
   const toggleTheme = useCallback(() => {
     setIsDark(prev => {
       const next = !prev;
@@ -225,7 +204,6 @@ const Home = () => {
       return next;
     });
   }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('.navbar');
@@ -241,14 +219,10 @@ const Home = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-
   return (
     <div className="portfolio-container">
-
       {/* ─── Scroll Progress Bar ─── */}
       <motion.div className="scroll-progress" style={{ scaleX }} />
-
       {/* ─── Animated Background ─── */}
       <ParticlesBackground />
       <div className="bg-grid" aria-hidden="true" />
@@ -258,7 +232,6 @@ const Home = () => {
         <div className="orb orb-3" />
         <div className="orb orb-4" />
       </div>
-
       {/* ─── Navbar ─── */}
       <nav className="navbar">
         <div className="nav-container">
@@ -267,7 +240,6 @@ const Home = () => {
             Deepak
             <span className="logo-bracket">/&gt;</span>
           </div>
-
           <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
             {['home','about','education','experience','projects','skills','certifications','contact'].map((item) => (
               <a key={item} href={`#${item}`} onClick={() => setIsMenuOpen(false)}>
@@ -275,7 +247,6 @@ const Home = () => {
               </a>
             ))}
           </div>
-
           {/* Right-side controls: theme toggle + hamburger */}
           <div className="nav-right">
             <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
@@ -289,7 +260,6 @@ const Home = () => {
           </div>
         </div>
       </nav>
-
       {/* Mobile menu backdrop — tap outside to close */}
       {isMenuOpen && (
         <div
@@ -305,7 +275,6 @@ const Home = () => {
           draggable={false}
           aria-hidden="true"
         />
-
       {/* ─── Hero Section ─── */}
       <header id="home" className="hero-section">
         <motion.div
@@ -336,7 +305,6 @@ const Home = () => {
             <div className="tech-badge tech-badge-3">Node.js</div>
             <div className="tech-badge tech-badge-4">Python</div>
           </motion.div>
-
           <motion.div className="hero-text" variants={itemVariants}>
             <div className="hero-greeting">Hello, There! 👋</div>
             <h1>
@@ -354,7 +322,6 @@ const Home = () => {
               <span className="location-sep">|</span>
               <span>Bhimavaram, AP</span>
             </p>
-
             <div className="social-links">
               <a href="https://www.linkedin.com/in/deepak-naga-subhash-girijala-ba517431a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <FaLinkedin />
@@ -369,14 +336,12 @@ const Home = () => {
                 <FaPhone />
               </a>
             </div>
-
             <div className="hero-buttons">
               <a href="/DeepakCV.pdf" download="Deepak_Girijala_Resume.pdf" className="btn primary">
                 <FaDownload /> Download Resume
               </a>
               <a href="#contact" className="btn secondary">Get in Touch</a>
             </div>
-
             {/* Stats row */}
             <div className="hero-stats">
               <div className="stat"><span className="stat-num">9</span><span className="stat-label">Months Exp</span></div>
@@ -387,14 +352,12 @@ const Home = () => {
             </div>
           </motion.div>
         </motion.div>
-
         {/* Scroll hint */}
         <div className="scroll-hint">
           <div className="scroll-mouse"><div className="scroll-wheel" /></div>
           <span>Scroll</span>
         </div>
       </header>
-
       {/* ─── About Section ─── */}
       <motion.section
         id="about"
@@ -414,7 +377,6 @@ const Home = () => {
               basic machine learning models (Decision Trees, KNN).
             </p>
           </div>
-
           <div className="about-columns">
             <TiltCard className="about-column">
               <div className="column-icon"><FaCode size={28} /></div>
@@ -440,7 +402,6 @@ const Home = () => {
           </div>
         </div>
       </motion.section>
-
       {/* ─── Education ─── */}
       <motion.section
         id="education"
@@ -486,7 +447,6 @@ const Home = () => {
           ))}
         </div>
       </motion.section>
-
       {/* ─── Experience ─── */}
       <motion.section
         id="experience"
@@ -497,7 +457,6 @@ const Home = () => {
         variants={sectionVariants}
       >
         <h2 className="section-title"><FaBriefcase className="title-icon" /> Experience</h2>
-
         <div className="company-banner">
             <img src={tWorksLogo} alt="tWorks" className="company-logo" />
             <div className="company-banner-divider" />
@@ -549,8 +508,7 @@ const Home = () => {
           ))}
         </div>
       </motion.section>
-
-      {/* ─── Projects ─── */}
+      {/* ─── Projects ─── (UPDATED based on resume + LinkedIn) */}
       <motion.section
         id="projects"
         className="section"
@@ -561,12 +519,12 @@ const Home = () => {
       >
         <h2 className="section-title">Projects<span></span></h2>
         <div className="projects-grid">
+          {/* Replaced Water Quality project with Lam Research Challenge Web Application (main professional project from resume) */}
           <ProjectCard
-            icon={FaDatabase}
-            title="Water Quality Prediction"
-            description="Machine learning web application to classify water potability using Decision Tree and KNN algorithms. Full-stack implementation with Django, SQLite, HTML/CSS/JS."
-            tags={["Python", "Django", "Scikit-learn", "Machine Learning", "SQLite"]}
-            imgSrc={waterQualityImg}  
+            icon={FaCode}
+            title="Lam Research Challenge Web Application"
+            description="Scalable full-stack competition management platform (Client: Lam Research) built with React.js, Node.js, Express.js & MySQL. Secure REST APIs with OTP verification, password recovery, role-based authentication & bcrypt. OpenAI integration for automated evaluation, DigitalOcean Spaces cloud file uploads (PPT/PDF/Video), Redis + Bull Queue, Google Analytics dashboards, Helmet security, rate limiting & optimized MySQL schemas."
+            tags={["React", "Node.js", "Express", "MySQL", "OpenAI", "DigitalOcean Spaces", "Redis"]}
           />
           <ProjectCard
             title="Developer Portfolio"
@@ -575,17 +533,17 @@ const Home = () => {
             icon={FaCode}
             imgSrc={portfolioImg}
           />
+          {/* Updated Ushodaya Bankers → Bankers Website to exactly match resume description */}
           <ProjectCard
             icon={FaDatabase}
-            title="Ushodaya Bankers"
-            description="A full-stack gold loan management system for a local banking business. Features secure admin login with bcrypt & OTP-based password reset, loan creation, real-time interest calculation, and payment tracking — with a GSAP-animated landing page."
-            tags={["Python", "Flask", "MySQL", "HTML/CSS"]}
+            title="Bankers Website (Full-Stack Banking Platform)"
+            description="Full-stack banking web application supporting account management, transactions, and loan application workflows. Secure authentication, role-based access control, protected backend API routes, and MySQL database schemas for financial & user operations."
+            tags={["Node.js", "Express", "MySQL", "React", "Authentication", "RBAC"]}
             imgSrc={ushodayaImg}
           />
         </div>
         <p className="projects-note">✦ More projects coming soon</p>
       </motion.section>
-
       {/* ─── Skills ─── */}
       <motion.section
         id="skills"
@@ -627,7 +585,6 @@ const Home = () => {
           ))}
         </div>
       </motion.section>
-
       {/* ─── Certifications ─── */}
       <motion.section
         id="certifications"
@@ -686,7 +643,6 @@ const Home = () => {
           ))}
         </div>
       </motion.section>
-
       {/* ─── Contact ─── */}
       <motion.section
         id="contact"
@@ -701,7 +657,6 @@ const Home = () => {
           Currently open to full-time opportunities, interesting robotics/web projects,
           and collaborations in Hyderabad / remote.
         </p>
-
         <div className="contact-cards">
           {[
             { icon: <FaEnvelope size={32} />, label: "Email", value: "deepakgirijala96@gmail.com", href: "mailto:deepakgirijala96@gmail.com" },
@@ -718,7 +673,6 @@ const Home = () => {
           ))}
         </div>
       </motion.section>
-
       {/* ─── Footer ─── */}
       <footer className="footer">
         <div className="footer-inner">
@@ -734,10 +688,7 @@ const Home = () => {
           </div>
         </div>
       </footer>
-
     </div>
   );
 };
-
 export default Home;
-
